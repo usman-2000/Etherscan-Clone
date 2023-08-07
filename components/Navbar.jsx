@@ -18,13 +18,20 @@ const Navbar = () => {
       const API_KEY_ETHERSCAN = "2A6JUD2J34U7H3HUXIQH4K72P4JZE745IQ";
       axios
         .get(
-          `https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${API_KEY_ETHERSCAN}`
+          `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${API_KEY_ETHERSCAN}`
         )
-        .then((response) => console.log(response));
+        .then((response) => {
+          setPrice(response.data.result);
+          console.log(price);
+        });
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getEtherPrice();
+  }, []);
 
   return (
     <div className={Style.navbar}>
